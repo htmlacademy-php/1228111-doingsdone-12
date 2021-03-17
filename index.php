@@ -16,11 +16,11 @@ $layout = include_template('layout.php', [
 ]);
 echo $layout;
 
-
-$categories = select_categories($con, $users_id);
+$user_id = 1;
+$categories = select_categories($con, $user_id);
 $all_tasks = [];
 foreach ($categories as $category) {
-  $all_tasks = [
+  $all_tasks [] = [
     'name' => $category['name'],
     'tasks' => select_tasks($con, $category['id']) 
   ];

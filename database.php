@@ -14,26 +14,30 @@ if (!$con) {
 }
 
 /**
- * @param $con string
- * @param возврат результата преобразованного массива
+ * function возвращает категории для текущего пользователя
+ * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
+ * @param int $user_id идентификатор пользователя, для которого получаем все проекты
+ * @return Array массив категорий для текущего пользователя
  */
 
-function select_categories($con, $users_id)
+function select_categories($con, $user_id)
 {
-    $query_categories = "SELECT name, id FROM categories WHERE users_id = $users_id";;
+    $query_categories = "SELECT name, id FROM categories WHERE users_id = $user_id";;
     $res = mysqli_query($con, $query_categories);
     $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return ($categories);
 }
 
 /**
- * @param var $con string
- * @param var $categories_id string
- * @param возврат результата преобразованного массива
+ * function возвращает задачи для одной категории
+ * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
+ * @param int $category_id идентификатор категории, для которого получаем все задачи
+ * @return Array массив задач для одной категории
  */
-function select_tasks($con, $categories_id) 
+
+function select_tasks($con, $category_id) 
 {
-    $query_tasks = "SELECT put_date, status, deadline FROM tasks WHERE category_id = $categories_id;";
+    $query_tasks = "SELECT put_date, status, deadline FROM tasks WHERE category_id = $category_id;";
     $res = mysqli_query($con, $query_tasks);
     $tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return ($tasks);
