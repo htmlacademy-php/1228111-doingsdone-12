@@ -4,9 +4,9 @@
         <ul class="main-navigation__list">
             <?php foreach ($categories as $category) : ?>
             <li class="main-navigation__list-item">
-                <a class="main-navigation__list-item-link" href="#"><?= $category ?></a>
+                <a class="main-navigation__list-item-link" href="#"><?= $category['title'] ?></a>
                 <span
-                    class="main-navigation__list-item-count"><?= htmlspecialchars(count_task_categories($categories, $tasks)); ?></span>
+                    class="main-navigation__list-item-count"><?= htmlspecialchars(count_task_categories($category['id'], $tasks)); ?></span>
             </li>
             <?php endforeach; ?>
         </ul>
@@ -31,15 +31,15 @@
         </nav>
         <label class="checkbox">
             <input
-                class="checkbox__input visually-hidden show_completed <?= ($show_complete_tasks) && $task['is_complete'] ? ' checked' : ''; ?>"
+                class="checkbox__input visually-hidden show_completed <?= ($show_complete_tasks) && $task['status'] ? ' checked' : ''; ?>"
                 type="checkbox" value="1">
             <span class="checkbox__text">Показывать выполненные</span>
         </label>
     </div>
     <table class="tasks">
         <?php foreach ($tasks as $task) : ?>
-        <?php if (!$task['is_complete']) : ?>
-        <tr class="tasks__item task <?= is_task_important($task) ? 'task--important' : '' ?>">
+        <?php if (!$task['status']) : ?>
+        <tr class="tasks__item task <?= is_task_important($task['deadline']) ? 'task--important' : '' ?>">
             <td class="task__select">
                 <label class="checkbox task__checkbox">
                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="0">
@@ -50,9 +50,9 @@
             <td class="task__file">
                 <a class="download-link" href="#">Home.psd</a>
             </td>
-            <td class="task__date"><?= $task['date'] ?></td>
+            <td class="task__date"><?= $task['deadline'] ?></td>
         </tr>
-        <?php elseif ($task['is_complete'] && !$show_complete_tasks) : ?>
+        <?php elseif ($task['status'] && !$show_complete_tasks) : ?>
         <tr class="tasks__item task task--completed">
             <td class="task__select">
                 <label class="checkbox task__checkbox">
@@ -60,7 +60,7 @@
                     <span class="checkbox__text"><?= htmlspecialchars($task['title']) ?></span>
                 </label>
             </td>
-            <td class="task__date"><?= htmlspecialchars($task['date']) ?></td>
+            <td class="task__date"><?= htmlspecialchars($task['deadline']) ?></td>
             <td class="task__controls"></td>
         </tr>
         <?php endif; ?>

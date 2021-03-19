@@ -4,9 +4,12 @@ require_once('database.php');
 require_once('utils.php');
 require_once('helpers.php');
 
-
-
 $show_complete_tasks = rand(0, 1);
+$user_id = 1;
+$categories = select_categories($con, $user_id);
+$tasks = select_tasks($con, $user_id);
+echo '<pre>';
+
 $content_main = include_template('main.php', [
   'categories' => $categories,
   'tasks' => $tasks,
@@ -18,19 +21,11 @@ $layout = include_template('layout.php', [
 ]);
 echo $layout;
 
-$user_id = 1;
-
-/*$categories = select_categories($con, $user_id);
-$all_tasks = [];
-foreach ($categories as $category) {
-  $all_tasks [] = [
-    'name' => $category['title'],
-    'tasks' => select_tasks($con, $user_id)
-  ];
-}
-var_dump($all_tasks);*/
 
 
-$categories = select_categories($con, $user_id);
-$tasks = select_tasks($con, $user_id);
+
+
+
+
+
 

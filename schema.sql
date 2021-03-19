@@ -19,8 +19,7 @@ CREATE TABLE categories (
 
 CREATE TABLE tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  title varchar(100) NOT NULL,
-  put_date DATE NOT NULL,
+  title varchar(50) NOT NULL,
   status BOOLEAN NOT NULL,
   file CHAR(64) NOT NULL,
   deadline DATE NOT NULL,
