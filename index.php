@@ -15,18 +15,24 @@ $tasks = select_tasks($con, $user_id);
 
 
 $content_main = include_template('main.php', [
-  'categories' => $categories,
-  'tasks' => $tasks,
-  'show_complete_tasks' => $show_complete_tasks,
+    'categories' => $categories,
+    'tasks' => $tasks,
+    'show_complete_tasks' => $show_complete_tasks,
 ]);
 
 $layout = include_template('layout.php', [
-  'title' => "Дела в порядке", 'content' => $content_main
+    'title' => "Дела в порядке", 'content' => $content_main
 ]);
 echo $layout;
 
 
 
+//В сценарии index.php добавить проверку на существования параметра запроса с
+//идентификатором проекта. Если параметр присутствует, то показывать только те задачи,
+//что относятся к этому проекту.
 
-
-
+$cat  = filter_input(INPUT_GET, 'category_id', FILTER_SANITIZE_SPECIAL_CHARS);
+$category_id = ($_GET['category_id']) ?? '';
+if ($_GET['category_id']) {
+    ($_GET['category_id'] == $category['id']);
+}

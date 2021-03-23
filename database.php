@@ -36,14 +36,3 @@ function select_tasks($con, $user_id)
 }
 
 
-//В сценарии index.php добавить проверку на существования параметра запроса с
- //идентификатором проекта. Если параметр присутствует, то показывать только те задачи,
-  //что относятся к этому проекту.
-
-  $cat  = filter_input(INPUT_GET, 'category_id', FILTER_SANITIZE_SPECIAL_CHARS);
-  $category_id = ($_GET['category_id']) ?? '';
-  if ($_GET['category_id']) {
-     $task['category_id'] == $category['id'];
-}
-
-
