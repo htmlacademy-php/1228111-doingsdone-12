@@ -4,7 +4,7 @@
         <ul class="main-navigation__list">
             <?php foreach ($categories as $category) : ?>
             <li class="main-navigation__list-item">
-                <a class="main-navigation__list-item-link" href="#"><?= $category['title'] ?></a>
+                <a class="main-navigation__list-item-link" href="index.php?category_id=<?=$category['id']; ?>"><?= $category['title']; ?></a>
                 <span
                     class="main-navigation__list-item-count"><?= htmlspecialchars(count_task_categories($category['id'], $tasks)); ?></span>
             </li>
@@ -39,12 +39,12 @@
     <table class="tasks">
         <?php foreach ($tasks as $task) : ?>
         <?php if (!$task['status']) : ?>
-        <tr class="tasks__item task <?= is_task_important($task['deadline']) ? 'task--important' : '' ?>">
+        <tr class="tasks__item task <?= is_task_important($task['deadline']) ? 'task--important' : ''; ?>">
             <td class="task__select">
                 <label class="checkbox task__checkbox">
                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="0">
 
-                    <span class="checkbox__text"><?= $task['title'] ?></span>
+                    <span class="checkbox__text"><?= $task['title']; ?></span>
                 </label>
             </td>
             <td class="task__file">
@@ -57,10 +57,10 @@
             <td class="task__select">
                 <label class="checkbox task__checkbox">
                     <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                    <span class="checkbox__text"><?= htmlspecialchars($task['title']) ?></span>
+                    <span class="checkbox__text"><?= htmlspecialchars($task['title']); ?></span>
                 </label>
             </td>
-            <td class="task__date"><?= htmlspecialchars($task['deadline']) ?></td>
+            <td class="task__date"><?= htmlspecialchars($task['deadline']); ?></td>
             <td class="task__controls"></td>
         </tr>
         <?php endif; ?>
