@@ -3,8 +3,8 @@
     <nav class="main-navigation">
         <ul class="main-navigation__list">
             <?php foreach ($categories as $category) : ?>
-            <li class="main-navigation__list-item">
-                <a class="main-navigation__list-item-link" href="index.php?category_id=<?=$category['id']; ?>"><?= $category['title']; ?></a>
+            <li class="main-navigation__list-item  <?= $category['id'] ? 'main-navigation__list-item--active' : '' ; ?>">
+            <a class="main-navigation__list-item-link" href="index.php?category_id=<?=$category['id']; ?>"><?= $category['title']; ?></a>
                 <span
                     class="main-navigation__list-item-count"><?= htmlspecialchars(count_task_categories($category['id'], $tasks)); ?></span>
             </li>
@@ -42,7 +42,7 @@
         <tr class="tasks__item task <?= is_task_important($task['deadline']) ? 'task--important' : ''; ?>">
             <td class="task__select">
                 <label class="checkbox task__checkbox">
-                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="0">
+                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?= $tasks['id']; ?>">
 
                     <span class="checkbox__text"><?= $task['title']; ?></span>
                 </label>

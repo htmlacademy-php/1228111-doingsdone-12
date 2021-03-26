@@ -16,7 +16,7 @@ if (!$con) {
  */
 function select_categories($con, $user_id)
 {
-    $query_categories = "SELECT title, id FROM categories WHERE user_id = $user_id";
+    $query_categories = "SELECT title, id, user_id FROM categories WHERE user_id = $user_id";
     $res = mysqli_query($con, $query_categories);
     $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return $categories;
@@ -34,5 +34,12 @@ function select_tasks($con, $user_id)
     $tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return $tasks;
 }
+
+
+
+
+
+
+
 
 

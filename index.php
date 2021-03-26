@@ -29,10 +29,28 @@ echo $layout;
 
 //В сценарии index.php добавить проверку на существования параметра запроса с
 //идентификатором проекта. Если параметр присутствует, то показывать только те задачи,
-//что относятся к этому проекту.
+//что относятся к этому проекту.$categiry
 
-$cat  = filter_input(INPUT_GET, 'category_id', FILTER_SANITIZE_SPECIAL_CHARS);
-$category_id = ($_GET['category_id']) ?? '';
-if ($_GET['category_id']) {
-    ($_GET['category_id'] == $category['id']);
+
+
+if(isset($_GET['category_id'])) {
+$category_id = ($_GET['category_id']);
 }
+/*echo '<pre>';
+var_dump($tasks);
+var_dump($categories);
+var_dump($_GET);*/
+
+function is_category() {
+
+if (array_key_exists('id', $categories)) {
+ 
+}
+}
+
+
+
+
+
+
+
