@@ -36,17 +36,17 @@ echo $layout;
 if(isset($_GET['category_id'])) {
 $category_id = ($_GET['category_id']);
 }
-/*echo '<pre>';
+echo '<pre>';
 var_dump($tasks);
 var_dump($categories);
-var_dump($_GET);*/
+var_dump($_GET);
 
-function is_category() {
-
+/*function is_category() {
+foreach($categories as $category){
 if (array_key_exists('id', $categories)) {
- 
+return true;
 }
-}
+}*/
 
 
 
