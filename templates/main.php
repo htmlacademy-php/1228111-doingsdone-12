@@ -3,7 +3,7 @@
     <nav class="main-navigation">
         <ul class="main-navigation__list">
             <?php foreach ($categories as $category) : ?>
-            <li class="main-navigation__list-item  <?= $category['id'] ? 'main-navigation__list-item--active' : '' ; ?>">
+            <li class="main-navigation__list-item <?= $category['id'] ? 'main-navigation__list-item--active' : '' ; ?>">
             <a class="main-navigation__list-item-link" href="index.php?category_id=<?=$category['id']; ?>"><?= $category['title']; ?></a>
                 <span
                     class="main-navigation__list-item-count"><?= htmlspecialchars(count_task_categories($category['id'], $tasks)); ?></span>
@@ -44,7 +44,8 @@
                 <label class="checkbox task__checkbox">
                     <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="<?= $tasks['id']; ?>">
 
-                    <span class="checkbox__text"><?= $task['title']; ?></span>
+                    <span class="checkbox__text"><?=$task['title']; ?>
+                    </span>
                 </label>
             </td>
             <td class="task__file">

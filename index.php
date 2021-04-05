@@ -2,7 +2,6 @@
 require_once('config.php');
 require_once('database.php');
 require_once('utils.php');
-//require_once('link-category.php');
 require_once('helpers.php');
 
 
@@ -11,7 +10,11 @@ $user_id = 1;
 $categories = select_categories($con, $user_id);
 $tasks = select_tasks($con, $user_id);
 
+if(isset($_GET['category_id'])) {
+$category_id = ($_GET['category_id']);
+}
 
+$filtered_tasks = get_new_tasks($tasks, $category_id);
 
 
 $content_main = include_template('main.php', [
@@ -27,30 +30,8 @@ echo $layout;
 
 
 
-//В сценарии index.php добавить проверку на существования параметра запроса с
-//идентификатором проекта. Если параметр присутствует, то показывать только те задачи,
-//что относятся к этому проекту.$categiry
 
 
-
-if(isset($_GET['category_id'])) {
-$category_id = ($_GET['category_id']);
-}
 echo '<pre>';
-var_dump($tasks);
-var_dump($categories);
-var_dump($_GET);
-
-/*function is_category() {
-foreach($categories as $category){
-if (array_key_exists('id', $categories)) {
-return true;
-}
-}*/
-
-
-
-
-
-
+var_dump($filtered_tasks);
 

@@ -35,11 +35,21 @@ function select_tasks($con, $user_id)
     return $tasks;
 }
 
+/**
+ * получаем задачи для конкретной категории
+ * @param array $tasks массив всех задач
+ * @param int $category_id - id категории, для которой ищем задачи
+ * @return array $new_tasks- задачи для конкретной категории
+ **/
 
-
-
-
-
-
+function get_new_tasks($tasks, $category_id) {
+    $new_tasks = [];
+    foreach($tasks as $task) {
+        if($task['category_id'] === $category_id) {
+            $new_tasks = $task;
+        }
+    }
+    return $new_tasks;
+}
 
 
