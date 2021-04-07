@@ -42,14 +42,13 @@ function select_tasks($con, $user_id)
  * @return array $new_tasks- задачи для конкретной категории
  **/
 
-function get_new_tasks($tasks, $category_id) {
+function filter_tasks_by_category($tasks, $category_id)
+{
     $new_tasks = [];
-    foreach($tasks as $task) {
-        if($task['category_id'] === $category_id) {
-            $new_tasks = $task;
+    foreach ($tasks as $task) {
+        if ($task['category_id'] === $category_id) {
+            array_push($new_tasks, $task);
         }
     }
     return $new_tasks;
 }
-
-
