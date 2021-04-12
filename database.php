@@ -29,10 +29,10 @@ function select_categories($con, $user_id)
  */
 function select_tasks($con, $user_id)
 {
-    $query_tasks = "SELECT title, status, deadline, user_id, category_id FROM tasks WHERE user_id = $user_id";
+    $query_tasks = "SELECT id, title, status, deadline, user_id, category_id FROM tasks WHERE user_id = $user_id";
     $res = mysqli_query($con, $query_tasks);
-    $tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
-    return $tasks;
+    $all_tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    return $all_tasks;
 }
 
 /**
