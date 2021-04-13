@@ -32,7 +32,7 @@
                 </div>
             </header>
 
-            <div class="content"><?= $content ?></div>
+            <div class="content"><?= $content; ?></div>
         </div>
     </div>
     <footer class="main-footer">

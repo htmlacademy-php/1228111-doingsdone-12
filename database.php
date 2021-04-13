@@ -16,7 +16,7 @@ if (!$con) {
  */
 function select_categories($con, $user_id)
 {
-    $query_categories = "SELECT title, id FROM categories WHERE user_id = $user_id";
+    $query_categories = "SELECT title, id, user_id FROM categories WHERE user_id = $user_id";
     $res = mysqli_query($con, $query_categories);
     $categories = mysqli_fetch_all($res, MYSQLI_ASSOC);
     return $categories;
@@ -29,8 +29,26 @@ function select_categories($con, $user_id)
  */
 function select_tasks($con, $user_id)
 {
-    $query_tasks = "SELECT title, status, deadline, user_id, category_id FROM tasks WHERE user_id = $user_id";
+    $query_tasks = "SELECT id, title, status, deadline, user_id, category_id FROM tasks WHERE user_id = $user_id";
     $res = mysqli_query($con, $query_tasks);
-    $tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
-    return $tasks;
+    $all_tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    return $all_tasks;
+}
+
+/**
+ * получаем задачи для конкретной категории
+ * @param array $tasks массив всех задач
+ * @param int $category_id - id категории, для которой ищем задачи
+ * @return array $new_tasks- задачи для конкретной категории
+ **/
+
+function filter_tasks_by_category($tasks, $category_id)
+{
+    $new_tasks = [];
+    foreach ($tasks as $task) {
+        if ($task['category_id'] === $category_id) {
+            array_push($new_tasks, $task);
+        }
+    }
+    return $new_tasks;
 }
