@@ -22,7 +22,7 @@ function select_categories($con, $user_id)
     return $categories;
 }
 /**
- * function возвращает задачи для одного поьзователя
+ * function возвращает задачи для одного пользователя
  * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
  * @param int $user_id идентификатор задач для одного пользователя
  * @return Array массив задач для одного поьзователя
