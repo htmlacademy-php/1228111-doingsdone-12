@@ -18,19 +18,17 @@ if (isset($_GET['category_id'])) {
     $filtered_tasks = $all_tasks;
 }
 
-
-
-
-
-
-$content_main = include_template('main.php', [
+ $left_content = include_template('left-content.php', [
     'categories' => $categories,
     'all_tasks' => $all_tasks,
+]);
+
+$content_main = include_template('main.php', [
     'filtered_tasks' => $filtered_tasks,
     'active_category_id' => $active_category_id,
     'show_complete_tasks' => $show_complete_tasks,
+    'left_content' => $left_content,
 ]);
-
 
 $layout = include_template('layout.php', [
     'title' => "Дела в порядке", 'content' => $content_main,

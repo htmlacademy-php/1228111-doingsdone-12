@@ -1,36 +1,64 @@
 <?php
 require_once('config.php');
-require_once('helpers.php');
 require_once('database.php');
+require_once('helpers.php');
+require_once('utils.php');
 
-if (isset($_POST['done'])) {
-    if (!empty($_POST)) {
-
-        foreach ($_POST as $field) {
-            $field_task = $_POST['name'];
-            $field_project = $_POST['project'];
-            $field_date = $_POST['date'];
-        }
-
-        $field_task = htmlspecialchars($field_task);
-        $field_project = htmlspecialchars($field_project);
-        $field_date = htmlspecialchars($field_date);
-
-        $field_task = urldecode($field_task);
-        $field_project = urldecode($field_project);
-        $field_date = urldecode($field_date);
-
-        $field_task = trim($field_task);
-        $field_project = trim($field_project);
-        $field_date = trim($field_date);
-    } else {
-        $error_field = [];
-    }
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 
-/*function is_date_valid(string $date) : bool {
-    $format_to_check = 'Y-m-d';
-    $dateTimeObj = date_create_from_format($format_to_check, $date);
+$nameErr = $projectErr = $dateErr = '';
+$name = $project = $date = '';
 
-    return $dateTimeObj !== false && array_sum(date_get_last_errors()) === 0;
-}*/
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['done']) {
+        $user_id = 1;
+        $categories = select_categories($con, $user_id);
+        $all_tasks = select_tasks($con, $user_id);
+    }
+    if (!empty($_POST['name'])) {
+
+        $name = test_input($_POST['name']);
+    } else {
+        return $nameErr;
+    }
+    if (!empty($_POST['project'])) {
+        $project = test_input($_POST['project']);
+    } else {
+
+        $projectErr;
+    }
+    if (!empty($_POST['date'])) {
+        is_date_valid($_POST['date']);
+    }
+} else {
+    $user_id = 1;
+    $categories = select_categories($con, $user_id);
+    $all_tasks = select_tasks($con, $user_id);
+}
+
+
+
+$left_content = include_template('left-content.php', [
+    'all_tasks' => $all_tasks,
+    'categories' => $categories,
+]);
+
+$content_main = include_template('form-task.php', [
+    'categories' => $categories,
+    'left_content' => $left_content,
+
+]);
+
+$layout = include_template('layout.php', [
+    'title' => "Дела в порядке",
+    'content' => $content_main,
+
+]);
+print($layout);
+ 
