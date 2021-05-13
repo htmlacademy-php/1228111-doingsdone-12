@@ -30,9 +30,10 @@
                     </div>
                 </div>
             </header>
-
-            <div class="content"><?= $content; ?></div>
-
+            <div class="content">
+                <div class="content"><?= $left_content; ?></div>
+                <div class="content"><?= $content; ?></div>
+            </div>
         </div>
     </div>
     <footer class="main-footer">

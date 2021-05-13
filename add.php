@@ -51,14 +51,12 @@ $left_content = include_template('left-content.php', [
 
 $content_main = include_template('form-task.php', [
     'categories' => $categories,
-    'left_content' => $left_content,
-
 ]);
 
 $layout = include_template('layout.php', [
     'title' => "Дела в порядке",
     'content' => $content_main,
-
+    'left_content' => $left_content,
 ]);
+
 print($layout);
- 

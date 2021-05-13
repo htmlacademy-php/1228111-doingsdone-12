@@ -27,11 +27,12 @@ $content_main = include_template('main.php', [
     'filtered_tasks' => $filtered_tasks,
     'active_category_id' => $active_category_id,
     'show_complete_tasks' => $show_complete_tasks,
-    'left_content' => $left_content,
-]);
+   ]);
 
 $layout = include_template('layout.php', [
-    'title' => "Дела в порядке", 'content' => $content_main,
+    'title' => "Дела в порядке",
+     'content' => $content_main,
+     'left_content' => $left_content,
 
 ]);
  print($layout);

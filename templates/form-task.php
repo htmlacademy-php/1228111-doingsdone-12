@@ -1,4 +1,4 @@
-<div class="content"><?= $left_content; ?></div>
+
     <main class="content__main">
         <h2 class="content__main-heading">Добавление задачи</h2>
 
