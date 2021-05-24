@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['project'] = 'Такого проекта не существует';
     }
 
-    if (is_date_valid($_POST['date']) === false) {
+    if (!is_date_valid($_POST['date'])) {
         $errors['date'] = 'Введите корректное время';
     }
 
@@ -28,70 +28,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['date'] = 'Вы ввели дату в прошлом';
     }
 
-    //загрузка файда
+    //загрузка файла
+    $file = $_FILES['file'];
 
-    var_dump($_FILES['file']);
-    if (isset($_FILES['file'])) {
-        $fileName = $_FILES['file']['file'];
-
-        // echo 'Файл: ' . $fileName . '<br>';
-
-        //Загрузка файла на сервер
-        $uploadDir = '/files/'; //Директория на сервере, для загружаемых файлов
-
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadDir . $fileName)) {
-            echo 'Файл успешно загружен на сервер.<br>';
-        } else {
-            $errors['file'] = 'Загрузка файла не удалась!<br>';
-            var_dump($errors);
-        }
+    //валидация
+    $types_file = ['image/jpeg', 'image/png', 'image/svg'];
+    if (!in_array($file['type'], $types_file)) {
+        $errors['file'] = 'Загрузите файл в формате jpeg, png, svg';
     }
 
-    if ($errors) {
-        $all_tasks = select_tasks($con, $user_id);
-
-        $left_content = include_template('left-content.php', [
-            'all_tasks' => $all_tasks,
-            'categories' => $categories,
-            'active_category_id' => $active_category_id,
-        ]);
-
-        $content_main = include_template('form-task.php', [
-            'categories' => $categories,
-            'errors' => $errors,
-        ]);
-
-        $layout = include_template('layout.php', [
-            'title' => "Дела в порядке",
-            'content' => $content_main,
-            'left_content' => $left_content,
-        ]);
-
-        print($layout);
-    } elseif (isset($_POST['done']) && !$errors) {
-
-        $query_tasks = "INSERT tasks (title, file, deadline, category_id) VALUES('name', 'file', 'date', 'project')";
-        $res = mysqli_query($con, $query_tasks);
-        $all_tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
+    $size_file = $file['size'] / 1000000;
+    $max_size = 1; //mb
+    if ($size_file > $max_size) {
+        $errors['file'] = 'Большой размер файла';
     }
 
-    /* $left_content = include_template('left-content.php', [
-            'all_tasks' => $all_tasks,
-            'categories' => $categories,
-            'active_category_id' => $active_category_id,
-        ]);
+    if (!is_dir('upload')) {
+        mkdir('upload', 0777, true);
+    };
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $file_name = time() . '.' . $extension;
+    move_uploaded_file($file['tmp_name'], 'upload/' . $file_name);
+}
 
-        $content_main = include_template('form-task.php', [
-            'categories' => $categories,
-        ]);
+if ($errors) {
+    $all_tasks = select_tasks($con, $user_id);
 
-        $layout = include_template('layout.php', [
-            'title' => "Дела в порядке",
-            'content' => $content_main,
-            'left_content' => $left_content,
-        ]);
+    $left_content = include_template('left-content.php', [
+        'all_tasks' => $all_tasks,
+        'categories' => $categories,
+        'active_category_id' => $active_category_id,
+    ]);
 
-        print($layout);*/
+    $content_main = include_template('form-task.php', [
+        'categories' => $categories,
+        'errors' => $errors,
+    ]);
+
+    $layout = include_template('layout.php', [
+        'title' => "Дела в порядке",
+        'content' => $content_main,
+        'left_content' => $left_content,
+    ]);
+
+    print($layout);
+
+    //Добавляем запись в БД
+} elseif (isset($_POST['done'])) {
+    $field_task = add_tasks($con, $_POST['name'], $_POST['project'], $_POST['date'], $_POST['file'], $user_id);
 } else {
     $all_tasks = select_tasks($con, $user_id);
     $left_content = include_template('left-content.php', [
