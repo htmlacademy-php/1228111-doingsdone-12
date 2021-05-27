@@ -50,6 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $file_name = time() . '.' . $extension;
     move_uploaded_file($file['tmp_name'], 'upload/' . $file_name);
 }
+if (isset($_POST['done'])) {
+    $field_task = add_tasks($con, $_POST['name'], $_POST['project'], $_POST['date'], $_POST['file'], $user_id);
+}
 
 if ($errors) {
     $all_tasks = select_tasks($con, $user_id);
@@ -72,11 +75,10 @@ if ($errors) {
     ]);
 
     print($layout);
-
+    }
     //Добавляем запись в БД
-} elseif (isset($_POST['done'])) {
-    $field_task = add_tasks($con, $_POST['name'], $_POST['project'], $_POST['date'], $_POST['file'], $user_id);
-} else {
+
+ else {
     $all_tasks = select_tasks($con, $user_id);
     $left_content = include_template('left-content.php', [
         'all_tasks' => $all_tasks,
@@ -96,3 +98,4 @@ if ($errors) {
 
     print($layout);
 }
+

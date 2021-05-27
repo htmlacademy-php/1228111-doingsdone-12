@@ -60,9 +60,14 @@ function filter_tasks_by_category($tasks, $category_id)
  * @return Array массив POST задачи для одного поьзователя
  */
 function add_tasks($con, $task_name, $project_name, $deadline, $file, $user_id) {
-    
+
     $query_tasks = "INSERT tasks (title, category_id, status, file, deadline, user_id) VALUES($task_name, $project_name, $deadline, $file, $user_id)";
-    $res = mysqli_query($con, $query_tasks);
-    $form_tasks = mysqli_fetch_all($res, MYSQLI_ASSOC);
-    return $form_tasks;
+return($query_tasks);
+  mysqli_close($con);
 }
+
+
+
+
+
+
