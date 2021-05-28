@@ -13,7 +13,7 @@
                 <a href="/" class="tasks-switch__item">Просроченные</a>
             </nav>
             <label class="checkbox">
-                <input class="checkbox__input visually-hidden show_completed <?= ($show_complete_tasks) && $task['status'] ? ' checked' : ''; ?>" type="checkbox" value="1">
+                <input class="checkbox__input visually-hidden show_completed <?= $show_complete_tasks ? 'checked' : ''; ?>" type="checkbox" value="1">
                 <span class="checkbox__text">Показывать выполненные</span>
             </label>
         </div>

@@ -56,18 +56,14 @@ function filter_tasks_by_category($tasks, $category_id)
 /**
  * function возвращает задачу для одного пользователя
  * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
- * @param int $user_id идентификатор задачи для одного пользователя
- * @return Array массив POST задачи для одного поьзователя
+ * @param int $con, $task_name, $project_name, $deadline, $file, $user_id идентификатор задачи для одного пользователя
+ * @return  ID новой задачи
  */
-function add_tasks($con, $task_name, $project_name, $deadline, $file, $user_id) {
+function add_task($con, $task_name, $project_id, $deadline, $file, $user_id)
+{
 
-    $query_tasks = "INSERT tasks (title, category_id, status, file, deadline, user_id) VALUES($task_name, $project_name, $deadline, $file, $user_id)";
-return($query_tasks);
-  mysqli_close($con);
+    $query_tasks = "INSERT tasks (title, category_id, deadline, file, user_id)
+            VALUES('$task_name', '$project_id', NULL, '', '$user_id')";
+    $res = mysqli_query($con, $query_tasks);
+    return mysqli_insert_id($con);
 }
-
-
-
-
-
-
