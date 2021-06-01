@@ -20,9 +20,9 @@ CREATE TABLE categories (
 CREATE TABLE tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title varchar(50) NOT NULL,
-  status BOOLEAN NOT NULL,
-  file CHAR(64) NOT NULL,
-  deadline DATE NOT NULL,
+  status BOOLEAN NOT NULL DEFAULT 0,
+  file CHAR(64),
+  deadline DATE,
   category_id int (10) NOT NULL,
   user_id int (10) NOT NULL
 );
