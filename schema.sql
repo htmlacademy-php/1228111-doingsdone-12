@@ -8,7 +8,7 @@ CREATE TABLE users (
   id int (10) AUTO_INCREMENT PRIMARY KEY,
   email varchar(50) NOT NULL UNIQUE,
   password char(255) NOT NULL UNIQUE,
-  name varchar(20) NOT NULL
+  name varchar(50) NOT NULL
 );
 
 CREATE TABLE categories (
@@ -26,3 +26,5 @@ CREATE TABLE tasks (
   category_id int (10) NOT NULL,
   user_id int (10) NOT NULL
 );
+
+

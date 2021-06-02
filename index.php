@@ -25,6 +25,11 @@ $left_content = include_template('left-content.php', [
     'active_category_id' => $active_category_id,
 ]);
 
+
+$button_user = include_template('button-user.php', [
+
+    ]);
+
 $content_main = include_template('main.php', [
     'filtered_tasks' => $filtered_tasks,
     'show_complete_tasks' => $show_complete_tasks,
@@ -34,6 +39,6 @@ $layout = include_template('layout.php', [
     'title' => "Дела в порядке",
     'content' => $content_main,
     'left_content' => $left_content,
-
+    'button_user' =>  $button_user,
 ]);
 print($layout);

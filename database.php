@@ -67,3 +67,18 @@ function add_task($con, $task_name, $project_id, $deadline, $file, $user_id)
     $res = mysqli_query($con, $query_tasks);
     return mysqli_insert_id($con);
 }
+
+/**function возвращает данные регистрации пользователя
+ * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
+ * @param int $con, $email, $password, $name идентификатор полей формы регистрации пользователя
+ * @return  ID данный пользователя
+ */
+
+function add_user($con, $email, $password, $name)
+{
+
+    $query_tasks = "INSERT users (email, password, name)
+    VALUES('$email', '$password', '$name')";
+    $res = mysqli_query($con, $query_tasks);
+    return mysqli_insert_id($con);
+}
