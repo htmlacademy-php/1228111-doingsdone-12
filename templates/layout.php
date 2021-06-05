@@ -18,7 +18,6 @@
                 <a href="/">
                     <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
                 </a>
-
                 <div class="main-header__side">
                     <a class="main-header__side-item button button--plus open-modal" href="add-task.php">Добавить задачу</a>
 
