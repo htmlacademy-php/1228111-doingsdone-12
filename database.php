@@ -22,7 +22,7 @@ function select_categories($con, $user_id)
     return $categories;
 }
 /**
- * function возвращает задачи для одного поьзователя
+ * function возвращает задачи для одного пользователя
  * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
  * @param int $user_id идентификатор задач для одного пользователя
  * @return Array массив задач для одного поьзователя
@@ -51,4 +51,33 @@ function filter_tasks_by_category($tasks, $category_id)
         }
     }
     return $new_tasks;
+}
+
+/**
+ * function возвращает задачу для одного пользователя
+ * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
+ * @param int $con, $task_name, $project_name, $deadline, $file, $user_id идентификатор задачи для одного пользователя
+ * @return  ID новой задачи
+ */
+function add_task($con, $task_name, $project_id, $deadline, $file, $user_id)
+{
+
+    $query_tasks = "INSERT tasks (title, category_id, deadline, file, user_id)
+            VALUES('$task_name', '$project_id', NULL, '', '$user_id')";
+    $res = mysqli_query($con, $query_tasks);
+    return mysqli_insert_id($con);
+}
+
+/**function возвращает данные регистрации пользователя
+ * @param mysqli $con идентификатор соединения, полученный с помощью mysqli_connect()
+ * @param int $con, $email, $password, $name идентификатор полей формы регистрации пользователя
+ * @return  ID данный пользователя
+ */
+
+function add_user($con, $email, $password, $name)
+{
+   $query_tasks = "INSERT users (email, password, name)
+    VALUES('$email', '$password', '$name')";
+    $res = mysqli_query($con, $query_tasks);
+    return mysqli_insert_id($con);
 }
