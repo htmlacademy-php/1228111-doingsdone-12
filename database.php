@@ -76,8 +76,7 @@ function add_task($con, $task_name, $project_id, $deadline, $file, $user_id)
 
 function add_user($con, $email, $password, $name)
 {
-
-    $query_tasks = "INSERT users (email, password, name)
+   $query_tasks = "INSERT users (email, password, name)
     VALUES('$email', '$password', '$name')";
     $res = mysqli_query($con, $query_tasks);
     return mysqli_insert_id($con);
