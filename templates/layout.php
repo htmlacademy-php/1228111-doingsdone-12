@@ -18,21 +18,18 @@
                 <a href="/">
                     <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
                 </a>
-
                 <div class="main-header__side">
-                    <a class="main-header__side-item button button--plus open-modal" href="add-task.php">Добавить задачу</a>
-
-                    <div class="main-header__side-item user-menu">
-                        <div class="user-menu__data">
-                            <p>Константин</p>
-                            <a href="#">Выйти</a>
-                        </div>
-                    </div>
+                    <div class="main-header__side"><?= $button_user; ?></div>
+                    <div class="main-header__side"><?= $button_register; ?></div>
                 </div>
             </header>
             <div class="content">
-                <div class="content"><?= $left_content; ?></div>
+                <div class="content"><?= $left_register; ?></div>
+                <div class="content"><?= $register; ?></div>
+                <div class="content"><?= $guest; ?></div>
+                <div class="content__side"><?= $left_content; ?></div>
                 <div class="content"><?= $content; ?></div>
+
             </div>
         </div>
     </div>
