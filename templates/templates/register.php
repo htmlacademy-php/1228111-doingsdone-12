@@ -5,7 +5,7 @@
         <div class="form__row">
             <label class="form__label" for="email">E-mail <sup>*</sup></label>
 
-<< : '';laceholder="Введ
+            <input class="form__input  <?= !empty($errors['email']) ? 'form__input--error' : ''; ?>" type="text" name="email" id="email" value="<?= !empty($_POST['email']) ? $_POST['email'] : ''; ?>" placeholder="Введите e-mail">
             <?php if (isset($errors['email'])) : ?>
                 <p class="form__message"><?= $errors['email']; ?></p>
             <?php endif; ?>

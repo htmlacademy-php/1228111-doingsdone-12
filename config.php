@@ -1,4 +1,5 @@
 <?php
+
 $config = [
     'sitename' => 'Doings',
     'tpl_path' => 'tpl/',
