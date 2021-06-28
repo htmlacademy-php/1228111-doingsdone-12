@@ -11,37 +11,23 @@ $errors = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //проверка наличия имени
 
-
-
     if (empty($_POST['email'])) {
         $errors['email'] = 'Поле обязательное для заполнения';
-    } else {
-        $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    }
+     /* $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
         if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
             $_POST['email'];
         } else {
-            $errors['email'] = 'Email указан неверно';
-        }
-    }
+           $errors['email'] = 'Email указан неверно';
 
+        }*/
 
-
-
-
-
-
-    /*  $email  = "MyEmail@mysite.ru";
-        if (preg_match("/^(?:[a-z0-9]+(?:[-_.]?[a-z0-9]+)?@[a-z0-9_.-]+(?:\.?[a-z0-9]+)?\.[a-z]{2,5})$/i", $email)) {
-            htmlspecialchars($email);
-        }
-    } else {
-        $errors['email'] = "Адрес указан не правильно.";
-    }*/
 
 
     if (empty($_POST['password'])) {
         $errors['password'] = 'Поле обязательное  для заполнения';
     } else {
+
         $pwd = $_POST['password'];
         if (strlen($pwd) < 8) {
             $errors['password'] = 'Пароль короткий!';
@@ -63,9 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($_POST['name'])) {
         $errors['name'] = 'Поле обязательное  для заполнения';
+    } else {
         //$name = $_POST['name'];
         if (strlen($_POST['name']) > 30) {
             $errors['name'] = 'Имя длинное!';
+        }
+
+        if (strlen($_POST['name']) < 4) {
+            $errors['name'] = 'Имя слишком короткое!';
         }
     }
 
@@ -87,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         print($layout);
     } else {
-        $add_user = add_user($con, $_POST['email'], $_POST['password'], $_POST['name']);
-        header('Location: index.php');
+        $add_user = add_user($con, $_POST['email'], md5($_POST['password']), $_POST['name']);
+        header('Location: form-autho.php');
     }
 } else {
 
