@@ -13,14 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($_POST['email'])) {
         $errors['email'] = 'Поле обязательное для заполнения';
-    } else {
-        $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    }
+     /* $sanitized_email = filter_var($email, FILTER_SANITIZE_EMAIL);
         if (filter_var($sanitized_email, FILTER_VALIDATE_EMAIL)) {
             $_POST['email'];
         } else {
-            $errors['email'] = 'Email указан неверно';
-        }
-    }
+           $errors['email'] = 'Email указан неверно';
+
+        }*/
+
 
 
     if (empty($_POST['password'])) {
@@ -77,8 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         print($layout);
     } else {
-        $add_user = add_user($con, $_POST['email'], $_POST['password'], $_POST['name']);
-        header('Location: index.php');
+        $add_user = add_user($con, $_POST['email'], md5($_POST['password']), $_POST['name']);
+        header('Location: form-autho.php');
     }
 } else {
 
