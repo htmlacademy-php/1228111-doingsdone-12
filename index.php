@@ -16,58 +16,5 @@ if (isset($_GET['category_id'])) {
     $filtered_tasks = filter_tasks_by_category($all_tasks, $active_category_id);
 } else {
     $active_tasks = $all_tasks;
-    $filtered_tasks = $all_tasks;
-}
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (empty($_POST['email'])) {
-        $errors['email'] = 'Поле обязательное  для заполнения';
-    }
-
-    if (empty($_POST['password'])) {
-        $errors['password'] = 'Поле обязательное  для заполнения';
-    }
-
-    if (empty($_POST['name'])) {
-        $errors['name'] = 'Поле обязательное  для заполнения';
-    }
-
-
-if($errors){
-    $button_register =  include_template('button-register.php', []);
-
-    $left_register = include_template('left-register.php', []);
-
-    $guest = include_template('guest.php', [
-        'errors' => $errors,]);
-
-    $layout = include_template('layout.php', [
-        'title' => "Дела в порядке",
-        'guest' => $guest,
-        'left_register' => $left_register,
-        'button_register' => $button_register,]);
-
-    print($layout);
-}
-}else{
-
-
-$left_content = include_template('left-content.php', [
-    'categories' => $categories,
-    'all_tasks' => $all_tasks,
-    'active_category_id' => $active_category_id,
-]);
-
-
-$button_user = include_template('button-user.php', []);
-
-$content_main = include_template('main.php', [
-    'filtered_tasks' => $filtered_tasks,
-    'show_complete_tasks' => $show_complete_tasks,]);
-
-$layout = include_template('layout.php', [
-    'title' => "Дела в порядке",
-    'content' => $content_main,
-    'left_content' => $left_content,
-    'button_user' =>  $button_user,]);
-print($layout);
+    $filtered_tasks     error     t_regist  для заполн  для заполнениdule7-nclude_template('button-user.php', []);clude_template('main.php', [lude_teleft_conude_template('button-regisude_template('left-registerude_teclude_template('layout.phpbuttone_template('left-contenaall_tasks,lude_template('main.php', [how_complete_tahow_complster
 }

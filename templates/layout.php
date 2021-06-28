@@ -26,8 +26,6 @@
             <div class="content">
                 <div class="content"><?= $left_register; ?></div>
                 <div class="content"><?= $register; ?></div>
-                <div class="content"><?= $guest; ?></div>
-                <div class="content"><?= $autho; ?></div>
                 <div class="content__side"><?= $left_content; ?></div>
                 <div class="content"><?= $content; ?></div>
 

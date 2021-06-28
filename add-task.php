@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $field_task = add_task($con, $_POST['name'], $_POST['project'], $_POST['date'], $file_name, $user_id);
         header('Location: index.php');
-        print($field_task);
+      
     }
 } else {
     $all_tasks = select_tasks($con, $user_id);
@@ -95,6 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'all_tasks' => $all_tasks,
         'categories' => $categories,
         'active_category_id' => false,
+    ]);
+
+    $button_user = include_template('button-user.php', [
+
     ]);
 
     $content_main = include_template('form-task.php', [
@@ -105,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'title' => "Дела в порядке",
         'content' => $content_main,
         'left_content' => $left_content,
+        'button_user' =>  $button_user,
     ]);
 
     print($layout);
